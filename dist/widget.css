@@ -1,0 +1,20 @@
+.widget {
+    display: flex;
+    flex-direction: row;
+
+    height: 100px;
+    width: 400px;
+
+    border: 1px solid red;
+}
+
+.track-art {
+    flex-grow: 0;
+
+    height: 100px;
+    width: 100px;
+}
+
+.track-info {
+    flex-grow: 1;
+}

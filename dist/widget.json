@@ -1,0 +1,20 @@
+{
+    "lastFmApiKey": {
+        "group": "Last.fm OPTIONS",
+        "type": "text",
+        "label": "Last.fm API Key",
+        "value": ""
+    },
+    "lastFmUsername": {
+        "group": "Last.fm OPTIONS",
+        "type": "text",
+        "label": "Last.fm Username",
+        "value": ""
+    },
+    "fontFamily": {
+        "group": "TEXT OPTIONS",
+        "type": "googleFont",
+        "label": "Font family",
+        "value": "Montserrat"
+    }
+}
