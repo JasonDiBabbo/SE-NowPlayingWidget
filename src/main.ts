@@ -1,12 +1,12 @@
 import { NowPlayingFeed } from './nowPlayingWidget';
 
-let nowPlayingFeed: NowPlayingFeed;
+let nowPlayingWidget: NowPlayingFeed;
 
 window.addEventListener('onWidgetLoad', function (obj) {
     const fieldData = obj['detail']['fieldData'];
     const apiKey = fieldData.lastFmApiKey;
     const user = fieldData.lastFmUsername;
 
-    nowPlayingFeed = new NowPlayingFeed(apiKey, user);
-    nowPlayingFeed.start();
+    nowPlayingWidget = new NowPlayingFeed(apiKey, user);
+    nowPlayingWidget.start();
 });
