@@ -1,7 +1,7 @@
 import { LastFmService } from './lastFmService';
 import { LastFmTrack } from './lastFmTrack';
 
-export class NowPlayingFeed {
+export class NowPlayingWidget {
     private readonly apiPollingInterval = 20000;
 
     private lastFmService: LastFmService;
@@ -12,7 +12,7 @@ export class NowPlayingFeed {
         this.lastFmService = new LastFmService(apiKey);
 
         if (!this.user) {
-            throw new Error(`NowPlayingFeed::Constructor - Parameter 'user' was not provided. A user must be provided.`)
+            throw new Error(`NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`)
         }
     }
 

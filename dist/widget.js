@@ -65,13 +65,13 @@ class LastFmService {
     }
 }
 
-class NowPlayingFeed {
+class NowPlayingWidget {
     constructor(apiKey, user) {
         this.user = user;
         this.apiPollingInterval = 20000;
         this.lastFmService = new LastFmService(apiKey);
         if (!this.user) {
-            throw new Error(`NowPlayingFeed::Constructor - Parameter 'user' was not provided. A user must be provided.`);
+            throw new Error(`NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`);
         }
     }
     checkNowPlaying() {
@@ -118,6 +118,6 @@ window.addEventListener('onWidgetLoad', function (obj) {
     const fieldData = obj['detail']['fieldData'];
     const apiKey = fieldData.lastFmApiKey;
     const user = fieldData.lastFmUsername;
-    nowPlayingWidget = new NowPlayingFeed(apiKey, user);
+    nowPlayingWidget = new NowPlayingWidget(apiKey, user);
     nowPlayingWidget.start();
 });
