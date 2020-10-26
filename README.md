@@ -1,6 +1,6 @@
 # Now Playing Widget
 
-This is a custom implementation of a "Now Playing" widget for use on the [StreamElements](https://streamelements.com) live streaming platform. With this widget, streamers can to display information about the songs they're currently listening to for their viewers.
+This is a custom implementation of a "Now Playing" widget for use on the [StreamElements](https://streamelements.com) platform. Streamers can use this widget to display information about the songs they're currently listening to for their viewers.
 
 If you're new to the StreamElements platform and/or have any questions about custom widgets, check out [this](https://blog.streamelements.com/how-can-you-become-a-code-guru-87071f223e1b) blog post.
 
