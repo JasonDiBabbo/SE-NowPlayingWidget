@@ -12,6 +12,6 @@
     "scripts": {
         "build": "rollup -c rollup.config.js",
         "build:watch": "rollup -c rollup.config.js -w",
-        "lint": "eslint . --ext .ts --config .eslint.json"
+        "lint": "eslint . --ext .ts"
     }
 }
