@@ -2,7 +2,12 @@
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^4.5.0",
         "@typescript-eslint/parser": "^4.5.0",
+        "del": "^6.0.0",
         "eslint": "^7.12.0",
+        "fancy-log": "^1.3.3",
+        "gulp": "^4.0.2",
+        "gulp-eslint": "^6.0.0",
+        "gulp-prettier": "^3.0.0",
         "rollup": "^2.32.1",
         "rollup-plugin-typescript2": "^0.28.0",
         "rollup-watch": "^3.2.2",
@@ -10,8 +15,8 @@
         "typescript": "^4.0.3"
     },
     "scripts": {
-        "build": "rollup -c rollup.config.js",
-        "build:watch": "rollup -c rollup.config.js -w",
-        "lint": "eslint . --ext .ts"
+        "build": "gulp",
+        "build:watch": "gulp watch",
+        "lint": "gulp lint"
     }
 }

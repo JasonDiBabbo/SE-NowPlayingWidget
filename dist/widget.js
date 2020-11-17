@@ -4,7 +4,7 @@ class LastFmTrack {
     constructor(json) {
         this.album = json?.['album']?.['#text'];
         this.artist = json?.['artist']?.['#text'];
-        this.nowPlaying = json?.["@attr"]?.["nowplaying"] ? true : false;
+        this.nowPlaying = json?.['@attr']?.['nowplaying'] ? true : false;
         this.title = json?.['name'];
         const images = json?.['image'];
         if (Array.isArray(images)) {
@@ -12,8 +12,7 @@ class LastFmTrack {
             this.albumArtMedium = images.find((x) => x?.size === 'medium')?.['#text'];
             this.albumArtLarge = images.find((x) => x?.size === 'large')?.['#text'];
             this.albumArtExtraLarge = images.find((x) => x?.size === 'extralarge')?.['#text'];
-        }
-        else {
+        } else {
             this.albumArtSmall = null;
             this.albumArtMedium = null;
             this.albumArtLarge = null;
@@ -24,9 +23,9 @@ class LastFmTrack {
         if (!track) {
             return false;
         }
-        return this.album === track.album &&
-            this.artist === track.artist &&
-            this.title === track.title;
+        return (
+            this.album === track.album && this.artist === track.artist && this.title === track.title
+        );
     }
 }
 
@@ -34,7 +33,9 @@ class LastFmService {
     constructor(apiKey) {
         this.apiKey = apiKey;
         if (!this.apiKey) {
-            throw new Error(`LastFmService::Constructor - Parameter 'apiKey' was not provided. An API key must be provided.`);
+            throw new Error(
+                `LastFmService::Constructor - Parameter 'apiKey' was not provided. An API key must be provided.`
+            );
         }
     }
     async getMostRecentTrack(user) {
@@ -42,10 +43,14 @@ class LastFmService {
     }
     async getRecentTracks(user, limit) {
         if (!user) {
-            throw new Error(`LastFmService::getRecentTracks - Parameter 'user' cannot be null or undefined.`);
+            throw new Error(
+                `LastFmService::getRecentTracks - Parameter 'user' cannot be null or undefined.`
+            );
         }
         if (limit < 1 || limit > 200) {
-            throw new Error(`LastFmService::getRecentTracks - Parameter 'limit' must be a positive integer with a maximum value of 200.`);
+            throw new Error(
+                `LastFmService::getRecentTracks - Parameter 'limit' must be a positive integer with a maximum value of 200.`
+            );
         }
         const apiMethod = 'user.getrecenttracks';
         const format = 'json';
@@ -54,14 +59,14 @@ class LastFmService {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'SameSite': 'Strict'
-            }
+                'SameSite': 'Strict',
+            },
         })
             .then((response) => response.json())
             .then((json) => {
-            const trackJson = json?.['recenttracks']?.['track']?.[0];
-            return new LastFmTrack(trackJson);
-        });
+                const trackJson = json?.['recenttracks']?.['track']?.[0];
+                return new LastFmTrack(trackJson);
+            });
     }
 }
 
@@ -71,20 +76,23 @@ class NowPlayingWidget {
         this.apiPollingInterval = 20000;
         this.lastFmService = new LastFmService(apiKey);
         if (!this.user) {
-            throw new Error(`NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`);
+            throw new Error(
+                `NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`
+            );
         }
     }
     checkNowPlaying() {
-        this.lastFmService.getMostRecentTrack(this.user)
+        this.lastFmService
+            .getMostRecentTrack(this.user)
             .then((track) => {
-            if (track.nowPlaying && !track.equals(this.currentTrack)) {
-                this.currentTrack = track;
-                this.updateNowPlayingTrack(this.currentTrack);
-            }
-        })
+                if (track.nowPlaying && !track.equals(this.currentTrack)) {
+                    this.currentTrack = track;
+                    this.updateNowPlayingTrack(this.currentTrack);
+                }
+            })
             .finally(() => {
-            setTimeout(() => this.checkNowPlaying(), this.apiPollingInterval);
-        });
+                setTimeout(() => this.checkNowPlaying(), this.apiPollingInterval);
+            });
     }
     start() {
         this.checkNowPlaying();
@@ -120,4 +128,5 @@ window.addEventListener('onWidgetLoad', function (obj) {
     const user = fieldData.lastFmUsername;
     nowPlayingWidget = new NowPlayingWidget(apiKey, user);
     nowPlayingWidget.start();
+    debugger;
 });
