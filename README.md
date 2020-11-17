@@ -20,7 +20,7 @@ If you want to fork the project or clone it and make any changes, building is re
 
 | **Name**      | **Description**                                                                                                    |
 |---------------|--------------------------------------------------------------------------------------------------------------------|
-| `build`       | Transpiles TypeScript code and bundles the widget into `widget.html|css|js|json` files in the `dist` folder.       |
+| `build`       | Transpiles TypeScript code and bundles the widget into `widget.html\|css\|js\|json` files in the `dist` folder.    |
 | `build:watch` | Runs the `build` script in watch mode. This will rerun the transpile/bundle process whenever changes are detected. |
 | `lint`        | Lints the project to report on best practice patterns in TypeScript code.                                          |
 
