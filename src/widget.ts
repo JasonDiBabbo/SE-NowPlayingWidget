@@ -1,7 +1,7 @@
-import { LastFmService } from './lastFmService';
-import { LastFmTrack } from './lastFmTrack';
+import { LastFmTrack } from '@models';
+import { LastFmService } from '@services';
 
-export class NowPlayingWidget {
+class NowPlayingWidget {
     private readonly apiPollingInterval = 20000;
 
     private lastFmService: LastFmService;
@@ -12,12 +12,15 @@ export class NowPlayingWidget {
         this.lastFmService = new LastFmService(apiKey);
 
         if (!this.user) {
-            throw new Error(`NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`)
+            throw new Error(
+                `NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`
+            );
         }
     }
 
     public checkNowPlaying(): void {
-        this.lastFmService.getMostRecentTrack(this.user)
+        this.lastFmService
+            .getMostRecentTrack(this.user)
             .then((track) => {
                 if (track.nowPlaying && !track.equals(this.currentTrack)) {
                     this.currentTrack = track;
@@ -60,3 +63,14 @@ export class NowPlayingWidget {
         element.innerText = album;
     }
 }
+
+let nowPlayingWidget: NowPlayingWidget;
+
+window.addEventListener('onWidgetLoad', function (obj) {
+    const fieldData = obj['detail']['fieldData'];
+    const apiKey = fieldData.lastFmApiKey;
+    const user = fieldData.lastFmUsername;
+
+    nowPlayingWidget = new NowPlayingWidget(apiKey, user);
+    nowPlayingWidget.start();
+});

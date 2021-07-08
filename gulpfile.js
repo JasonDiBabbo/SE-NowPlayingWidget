@@ -3,35 +3,28 @@ const del = require('del');
 const eslint = require('gulp-eslint');
 const log = require('fancy-log');
 const prettier = require('gulp-prettier');
-const rollup = require('rollup');
-const rollupTypeScript = require('rollup-plugin-typescript2');
+const gulpWebpack = require('webpack-stream');
+const webpackCompiler = require('webpack');
+const webpackConfig = require('./webpack.config')
 
-function build() {
-    log(`Transpiling TypeScript to 'dist/widget.js'`);
+function bundle() {
+    log('Running bundler');
 
-    return rollup
-        .rollup({
-            input: 'src/ts/main.ts',
-            plugins: [rollupTypeScript()],
-        })
-        .then((bundle) => {
-            return bundle.write({
-                file: 'dist/widget.js',
-                format: 'cjs',
-            });
-        });
+    return src('src/widget.ts')
+        .pipe(gulpWebpack(webpackConfig, webpackCompiler, function() { }))
+        .pipe(dest('dist/'));
 }
 
 function clean() {
-    log(`Cleaning up 'dist' directory.`);
+    log(`Cleaning up 'dist' directory`);
 
     return del('./dist/**', { force: true });
 }
 
 function format() {
-    log('Formatting widget.html|css|js|json');
+    log('Formatting widget.html|js|json');
 
-    return src('dist/widget.{js,html,css,json}')
+    return src('dist/widget.{html,json}')
         .pipe(
             prettier({
                 arrowParens: 'always',
@@ -59,18 +52,20 @@ function lint() {
 }
 
 function move() {
-    log(`Moving widget.html|css|json to 'dist' directory`);
+    log(`Moving widget.html|json to 'dist' directory`);
 
     return src('src/widget.{html,css,json}').pipe(dest('dist/'));
 }
 
 function watchFiles() {
+    log('Watching widget.html|json|css and *.ts');
+    
     watch('src/widget.{html,css,json}', move);
     watch('src/**/*.ts', exports.default);
 }
 
-exports.build = build;
+exports.bundle = bundle;
 exports.clean = clean;
 exports.lint = lint;
-exports.watch = watchFiles;
-exports.default = series(lint, clean, build, move, format);
+exports.watch = series(lint, clean, bundle, move, format, watchFiles);
+exports.default = series(lint, clean, bundle, move, format);
