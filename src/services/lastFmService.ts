@@ -1,9 +1,11 @@
-import { LastFmTrack } from './lastFmTrack';
+import { LastFmTrack } from '@models';
 
 export class LastFmService {
     constructor(private apiKey: string) {
         if (!this.apiKey) {
-            throw new Error(`LastFmService::Constructor - Parameter 'apiKey' was not provided. An API key must be provided.`);
+            throw new Error(
+                `LastFmService::Constructor - Parameter 'apiKey' was not provided. An API key must be provided.`
+            );
         }
     }
 
@@ -13,11 +15,15 @@ export class LastFmService {
 
     public async getRecentTracks(user: string, limit: number): Promise<LastFmTrack> {
         if (!user) {
-            throw new Error(`LastFmService::getRecentTracks - Parameter 'user' cannot be null or undefined.`);   
+            throw new Error(
+                `LastFmService::getRecentTracks - Parameter 'user' cannot be null or undefined.`
+            );
         }
 
         if (limit < 1 || limit > 200) {
-            throw new Error(`LastFmService::getRecentTracks - Parameter 'limit' must be a positive integer with a maximum value of 200.`);
+            throw new Error(
+                `LastFmService::getRecentTracks - Parameter 'limit' must be a positive integer with a maximum value of 200.`
+            );
         }
 
         const apiMethod = 'user.getrecenttracks';
@@ -28,8 +34,8 @@ export class LastFmService {
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'SameSite': 'Strict'
-            }
+                'SameSite': 'Strict',
+            },
         })
             .then((response) => response.json())
             .then((json) => {

@@ -1,6 +1,22 @@
 {
     "compilerOptions": {
-        "target": "ES2020"
+        "target": "ES2020",
+        "outDir": "./dist/",
+        "module": "ESNext",
+        "noImplicitAny": false,
+        "moduleResolution": "Node",
+        "baseUrl": "./src",
+        "paths": {
+            "@models": [
+                "models"
+            ],
+            "@services": [
+                "services"
+            ],
+            "@utilities": [
+                "utilities"
+            ]
+        }
     },
     "include": [
         "src/**/*.ts"
