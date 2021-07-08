@@ -8,6 +8,42 @@ class NowPlayingWidget {
 
     private currentTrack: LastFmTrack;
 
+    private set album(value: string) {
+        if (!this.albumElement) {
+            this.albumElement = document.querySelector('.track-album');
+        }
+
+        if (this.albumElement) {
+            this.albumElement.innerText = value;
+        }
+    }
+
+    private set artist(value: string) {
+        if (!this.artistElement) {
+            this.artistElement = document.querySelector('.track-artist');
+        }
+
+        if (this.artistElement) {
+            this.artistElement.innerText = value;
+        }
+    }
+
+    private set title(value: string) {
+        if (!this.titleElement) {
+            this.titleElement = document.querySelector('.track-title');
+        }
+
+        if (this.titleElement) {
+            this.titleElement.innerText = value;
+        }
+    }
+
+    private albumElement: HTMLElement;
+
+    private artistElement: HTMLElement;
+
+    private titleElement: HTMLElement;
+
     constructor(apiKey: string, private user: string) {
         this.lastFmService = new LastFmService(apiKey);
 
@@ -24,7 +60,7 @@ class NowPlayingWidget {
             .then((track) => {
                 if (track.nowPlaying && !track.equals(this.currentTrack)) {
                     this.currentTrack = track;
-                    this.updateNowPlayingTrack(this.currentTrack);
+                    this.updateTrack(this.currentTrack);
                 }
             })
             .finally(() => {
@@ -36,31 +72,17 @@ class NowPlayingWidget {
         this.checkNowPlaying();
     }
 
-    private updateNowPlayingTrack(track: LastFmTrack): void {
-        this.updateNowPlayingTrackAlbum(track.album);
-        this.updateNowPlayingTrackArt(track.albumArtExtraLarge);
-        this.updateNowPlayingTrackArtist(track.artist);
-        this.updateNowPlayingTrackTitle(track.title);
-    }
-
-    private updateNowPlayingTrackArt(src: string): void {
+    private updateArt(src: string): void {
         const element = document.querySelector('img.track-art') as HTMLElement;
         element.setAttribute('src', src);
     }
 
-    private updateNowPlayingTrackTitle(title: string): void {
-        const element = document.querySelector('.track-title') as HTMLElement;
-        element.innerText = title;
-    }
+    private updateTrack(track: LastFmTrack): void {
+        this.album = track.album;
+        this.artist = track.artist;
+        this.title = track.title;
 
-    private updateNowPlayingTrackArtist(artist: string): void {
-        const element = document.querySelector('.track-artist') as HTMLElement;
-        element.innerText = artist;
-    }
-
-    private updateNowPlayingTrackAlbum(album: string): void {
-        const element = document.querySelector('.track-album') as HTMLElement;
-        element.innerText = album;
+        this.updateArt(track.albumArtExtraLarge);
     }
 }
 
