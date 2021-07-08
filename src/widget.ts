@@ -1,10 +1,13 @@
 import { LastFmTrack } from '@models';
 import { LastFmService } from '@services';
+import { Time } from '@utilities';
 
 class NowPlayingWidget {
-    private readonly apiPollingInterval = 20000;
+    private readonly apiPollFrequency: number;
 
-    private lastFmService: LastFmService;
+    private readonly user: string;
+
+    private readonly lastFmService: LastFmService;
 
     private currentTrack: LastFmTrack;
 
@@ -44,14 +47,22 @@ class NowPlayingWidget {
 
     private titleElement: HTMLElement;
 
-    constructor(apiKey: string, private user: string) {
-        this.lastFmService = new LastFmService(apiKey);
-
-        if (!this.user) {
+    constructor(apiKey: string, user: string, apiPollFrequency: number) {
+        if (!user) {
             throw new Error(
                 `NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`
             );
         }
+
+        if (apiPollFrequency < 10000) {
+            throw new Error(
+                `NowPlayingWidget::Constructor - parameter 'apiPollFrequency' cannot be less than 10 seconds.`
+            );
+        }
+
+        this.user = user;
+        this.apiPollFrequency = apiPollFrequency;
+        this.lastFmService = new LastFmService(apiKey);
     }
 
     public checkNowPlaying(): void {
@@ -64,7 +75,7 @@ class NowPlayingWidget {
                 }
             })
             .finally(() => {
-                setTimeout(() => this.checkNowPlaying(), this.apiPollingInterval);
+                setTimeout(() => this.checkNowPlaying(), this.apiPollFrequency);
             });
     }
 
@@ -90,9 +101,11 @@ let nowPlayingWidget: NowPlayingWidget;
 
 window.addEventListener('onWidgetLoad', function (obj) {
     const fieldData = obj['detail']['fieldData'];
-    const apiKey = fieldData.lastFmApiKey;
-    const user = fieldData.lastFmUsername;
 
-    nowPlayingWidget = new NowPlayingWidget(apiKey, user);
+    const apiKey: string = fieldData.lastFmApiKey as string;
+    const user: string = fieldData.lastFmUsername as string;
+    const pollFrequency: number = Time.toMilliseconds(fieldData.lastFmApiPollFrequency as number);
+
+    nowPlayingWidget = new NowPlayingWidget(apiKey, user, pollFrequency);
     nowPlayingWidget.start();
 });

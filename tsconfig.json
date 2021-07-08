@@ -12,6 +12,9 @@
             ],
             "@services": [
                 "services"
+            ],
+            "@utilities": [
+                "utilities"
             ]
         }
     },
