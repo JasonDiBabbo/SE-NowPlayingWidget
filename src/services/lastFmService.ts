@@ -10,10 +10,16 @@ export class LastFmService {
     }
 
     public async getMostRecentTrack(user: string): Promise<LastFmTrack> {
-        return this.getRecentTracks(user, 1);
+        return this.getRecentTracks(user, 1).then((tracks) => {
+            if (tracks && tracks.length > 0) {
+                return tracks[0];
+            } else {
+                return null;
+            }
+        });
     }
 
-    public async getRecentTracks(user: string, limit: number): Promise<LastFmTrack> {
+    public async getRecentTracks(user: string, limit: number): Promise<LastFmTrack[]> {
         if (!user) {
             throw new Error(
                 `LastFmService::getRecentTracks - Parameter 'user' cannot be null or undefined.`
@@ -39,9 +45,11 @@ export class LastFmService {
         })
             .then((response) => response.json())
             .then((json) => {
-                const trackJson = json?.['recenttracks']?.['track']?.[0];
+                const trackJsonArray: unknown[] = json?.['recenttracks']?.['track'];
+                const tracks: LastFmTrack[] = [];
 
-                return new LastFmTrack(trackJson);
+                trackJsonArray.forEach((trackJson) => tracks.push(new LastFmTrack(trackJson)));
+                return tracks;
             });
     }
 }

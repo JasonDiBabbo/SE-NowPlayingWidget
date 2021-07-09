@@ -31,8 +31,8 @@ img[src] {
     display: block;
 }
 
-.art,
-.art-stack {
+.art-stack,
+.art {
     height: 100px;
     width: 100px;
 

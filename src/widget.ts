@@ -75,9 +75,19 @@ class NowPlayingWidget {
         this.lastFmService
             .getMostRecentTrack(this.user)
             .then((track) => {
-                if (track.nowPlaying && !track.equals(this.currentTrack)) {
+                const sameSong = track.equals(this.currentTrack);
+
+                if (track.nowPlaying && !sameSong) {
+                    const sameAlbum = this.currentTrack
+                        ? track.album === this.currentTrack.album
+                        : false;
+
                     this.currentTrack = track;
-                    this.updateTrack(this.currentTrack);
+                    if (sameAlbum) {
+                        this.updateCurrentTrackInformation(this.currentTrack);
+                    } else {
+                        this.updateCurrentTrack(this.currentTrack);
+                    }
                 }
             })
             .finally(() => {
@@ -89,12 +99,19 @@ class NowPlayingWidget {
         this.checkNowPlaying();
     }
 
-    private updateTrack(track: LastFmTrack): void {
+    private updateCurrentTrack(track: LastFmTrack): void {
+        this.updateCurrentTrackArtwork(track);
+        this.updateCurrentTrackInformation(track);
+    }
+
+    private updateCurrentTrackArtwork(track: LastFmTrack): void {
+        this.artStack.artwork = track.albumArtExtraLarge;
+    }
+
+    private updateCurrentTrackInformation(track: LastFmTrack): void {
         // this.album = track.album;
         // this.artist = track.artist;
         // this.title = track.title;
-
-        this.artStack.artwork = track.albumArtExtraLarge;
     }
 }
 

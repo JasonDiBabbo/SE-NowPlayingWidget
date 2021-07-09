@@ -28,7 +28,7 @@
     "albumArtBorderRadius": {
         "group": "Artwork Options",
         "type": "number",
-        "label": "Artwork Border Radius (px)",
+        "label": "Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1

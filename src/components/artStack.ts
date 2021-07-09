@@ -1,6 +1,5 @@
 export class ArtStack {
     public set artwork(value: string) {
-        console.log('setting artwork');
         this.appendImage(value);
 
         if (this.artStackElement.children.length === 1) {
@@ -32,8 +31,13 @@ export class ArtStack {
     }
 
     private fadeInImage(index: number): Promise<void> {
-        const image: HTMLImageElement = this.artStackElement.children[index] as HTMLImageElement;
+        if (this.artStackElement.children.length <= index) {
+            throw new Error(
+                `ArtStack::fadeInImage - Parameter 'index' with value '${index}' is out of bounds.`
+            );
+        }
 
+        const image: HTMLImageElement = this.artStackElement.children[index] as HTMLImageElement;
         return new Promise<void>((resolve) => {
             const handler = (event: TransitionEvent) => {
                 if (event.propertyName === 'opacity') {
@@ -48,6 +52,12 @@ export class ArtStack {
     }
 
     private fadeOutImage(index: number): Promise<void> {
+        if (this.artStackElement.children.length <= index) {
+            throw new Error(
+                `ArtStack::fadeOutImage - Parameter 'index' with value '${index}' is out of bounds.`
+            );
+        }
+
         const image: HTMLImageElement = this.artStackElement.children[index] as HTMLImageElement;
 
         return new Promise<void>((resolve) => {
