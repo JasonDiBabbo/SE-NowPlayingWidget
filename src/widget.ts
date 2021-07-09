@@ -1,9 +1,12 @@
+import { ArtStack } from 'components';
 import { LastFmTrack } from '@models';
 import { LastFmService } from '@services';
 import { Time } from '@utilities';
 
 class NowPlayingWidget {
     private readonly apiPollFrequency: number;
+
+    private readonly artStack: ArtStack;
 
     private readonly user: string;
 
@@ -63,6 +66,9 @@ class NowPlayingWidget {
         this.user = user;
         this.apiPollFrequency = apiPollFrequency;
         this.lastFmService = new LastFmService(apiKey);
+
+        const artStackElement = document.querySelector('.art-stack') as HTMLElement;
+        this.artStack = new ArtStack(artStackElement);
     }
 
     public checkNowPlaying(): void {
@@ -83,17 +89,12 @@ class NowPlayingWidget {
         this.checkNowPlaying();
     }
 
-    private updateArt(src: string): void {
-        const element = document.querySelector('img.track-art') as HTMLElement;
-        element.setAttribute('src', src);
-    }
-
     private updateTrack(track: LastFmTrack): void {
-        this.album = track.album;
-        this.artist = track.artist;
-        this.title = track.title;
+        // this.album = track.album;
+        // this.artist = track.artist;
+        // this.title = track.title;
 
-        this.updateArt(track.albumArtExtraLarge);
+        this.artStack.artwork = track.albumArtExtraLarge;
     }
 }
 

@@ -1,4 +1,4 @@
-.widget {
+/* .widget {
     display: flex;
     flex-direction: row;
 
@@ -17,4 +17,31 @@
 
 .track-info {
     flex-grow: 1;
+} */
+
+img {
+    display: none;
+}
+
+img[src] {
+    display: block;
+}
+
+.art,
+.art-stack {
+    height: 100px;
+    width: 100px;
+}
+
+.art-stack {
+    position: relative;
+}
+
+.art {
+    position: absolute;
+    transition: opacity 1s linear;
+}
+
+.transparent {
+    opacity: 0;
 }
