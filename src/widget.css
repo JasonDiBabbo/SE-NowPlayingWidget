@@ -1,4 +1,4 @@
-.widget {
+/* .widget {
     display: flex;
     flex-direction: row;
 
@@ -17,4 +17,37 @@
 
 .track-info {
     flex-grow: 1;
+} */
+
+:root {
+    --albumArtBorderRadius: {{albumArtBorderRadius}}px;
+}
+
+img {
+    display: none;
+}
+
+img[src] {
+    display: block;
+}
+
+.art-stack,
+.art {
+    height: 100px;
+    width: 100px;
+
+    border-radius: var(--albumArtBorderRadius);
+}
+
+.art-stack {
+    position: relative;
+}
+
+.art {
+    position: absolute;
+    transition: opacity 1s linear;
+}
+
+.transparent {
+    opacity: 0;
 }

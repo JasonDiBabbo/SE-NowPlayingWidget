@@ -1,9 +1,12 @@
+import { ArtStack } from 'components';
 import { LastFmTrack } from '@models';
 import { LastFmService } from '@services';
 import { Time } from '@utilities';
 
 class NowPlayingWidget {
     private readonly apiPollFrequency: number;
+
+    private readonly artStack: ArtStack;
 
     private readonly user: string;
 
@@ -63,15 +66,28 @@ class NowPlayingWidget {
         this.user = user;
         this.apiPollFrequency = apiPollFrequency;
         this.lastFmService = new LastFmService(apiKey);
+
+        const artStackElement = document.querySelector('.art-stack') as HTMLElement;
+        this.artStack = new ArtStack(artStackElement);
     }
 
     public checkNowPlaying(): void {
         this.lastFmService
             .getMostRecentTrack(this.user)
             .then((track) => {
-                if (track.nowPlaying && !track.equals(this.currentTrack)) {
+                const sameSong = track.equals(this.currentTrack);
+
+                if (track.nowPlaying && !sameSong) {
+                    const sameAlbum = this.currentTrack
+                        ? track.album === this.currentTrack.album
+                        : false;
+
                     this.currentTrack = track;
-                    this.updateTrack(this.currentTrack);
+                    if (sameAlbum) {
+                        this.updateCurrentTrackInformation(this.currentTrack);
+                    } else {
+                        this.updateCurrentTrack(this.currentTrack);
+                    }
                 }
             })
             .finally(() => {
@@ -83,17 +99,19 @@ class NowPlayingWidget {
         this.checkNowPlaying();
     }
 
-    private updateArt(src: string): void {
-        const element = document.querySelector('img.track-art') as HTMLElement;
-        element.setAttribute('src', src);
+    private updateCurrentTrack(track: LastFmTrack): void {
+        this.updateCurrentTrackArtwork(track);
+        this.updateCurrentTrackInformation(track);
     }
 
-    private updateTrack(track: LastFmTrack): void {
-        this.album = track.album;
-        this.artist = track.artist;
-        this.title = track.title;
+    private updateCurrentTrackArtwork(track: LastFmTrack): void {
+        this.artStack.artwork = track.albumArtExtraLarge;
+    }
 
-        this.updateArt(track.albumArtExtraLarge);
+    private updateCurrentTrackInformation(track: LastFmTrack): void {
+        // this.album = track.album;
+        // this.artist = track.artist;
+        // this.title = track.title;
     }
 }
 
