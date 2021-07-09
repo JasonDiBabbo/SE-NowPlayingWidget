@@ -19,6 +19,10 @@
     flex-grow: 1;
 } */
 
+:root {
+    --albumArtBorderRadius: {{albumArtBorderRadius}}px;
+}
+
 img {
     display: none;
 }
@@ -31,6 +35,8 @@ img[src] {
 .art-stack {
     height: 100px;
     width: 100px;
+
+    border-radius: var(--albumArtBorderRadius);
 }
 
 .art-stack {

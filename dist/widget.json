@@ -1,18 +1,18 @@
 {
     "lastFmUsername": {
-        "group": "Last.fm OPTIONS",
+        "group": "Last.fm Options",
         "type": "text",
         "label": "Username",
         "value": ""
     },
     "lastFmApiKey": {
-        "group": "Last.fm OPTIONS",
+        "group": "Last.fm Options",
         "type": "text",
         "label": "API Key",
         "value": ""
     },
     "lastFmApiPollFrequency": {
-        "group": "Last.fm OPTIONS",
+        "group": "Last.fm Options",
         "label": "API Poll Frequency (sec)",
         "type": "number",
         "value": 10,
@@ -20,9 +20,17 @@
         "step": 1
     },
     "fontFamily": {
-        "group": "TEXT OPTIONS",
+        "group": "Text Options",
         "type": "googleFont",
         "label": "Font family",
         "value": "Montserrat"
+    },
+    "albumArtBorderRadius": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Artwork Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
     }
 }
