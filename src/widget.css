@@ -3,10 +3,28 @@
     --albumArtHeight: {{albumArtHeight}}px;
     --albumArtWidth: {{albumArtWidth}}px;
     --albumArtSpaceAround: {{albumArtSpaceAround}}px;
+    --albumFontColor: {{albumFontColor}};
+    --albumFontSize: {{albumFontSize}}px;
+    --albumFontWeight: {{albumFontWeight}};
+    --artistFontColor: {{artistFontColor}};
+    --artistFontSize: {{artistFontSize}}px;
+    --artistFontWeight: {{artistFontWeight}};
+    --fontFamily: {{fontFamily}};
+    --fontSize: {{fontSize}}px;
+    --infoMarginLeft: {{infoMarginLeft}}px;
+    --infoMarginRight: {{infoMarginRight}}px;
+    --infoWidth: {{infoWidth}}px;
+    --titleFontColor: {{titleFontColor}};
+    --titleFontSize: {{titleFontSize}}px;
+    --titleFontWeight: {{titleFontWeight}};
     --widgetBackgroundColor: {{widgetBackgroundColor}};
     --widgetBorderRadius: {{widgetBorderRadius}}px;
 }
 
+html {
+    font-family: var(--fontFamily);
+    font-size: var(--fontSize);
+}
 
 .widget {
     display: flex;
@@ -50,4 +68,44 @@ img[src] {
 
 .transparent {
     opacity: 0;
+}
+
+.info {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: var(--infoMarginLeft);
+    margin-right: var(--infoMarginRight);
+    width: var(--infoWidth);
+}
+
+.info, .artist, .title, .album {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artist {
+    color: var(--artistFontColor);
+    font-size: var(--artistFontSize);
+    font-weight: var(--artistFontWeight);
+}
+
+.title {
+    color: var(--titleFontColor);
+    font-size: var(--titleFontSize);
+    font-weight: var(--titleFontWeight);
+}
+
+.album {
+    color: var(--albumFontColor);
+    font-size: var(--albumFontSize);
+    font-weight: var(--albumFontWeight);
+}
+
+.hidden {
+    display: none;
 }

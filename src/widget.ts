@@ -1,5 +1,5 @@
 import { ArtStack } from 'components';
-import { LastFmTrack } from '@models';
+import { LastFmTrack, WidgetOptions } from '@models';
 import { LastFmService } from '@services';
 import { Time } from '@utilities';
 
@@ -15,33 +15,15 @@ class NowPlayingWidget {
     private currentTrack: LastFmTrack;
 
     private set album(value: string) {
-        if (!this.albumElement) {
-            this.albumElement = document.querySelector('.track-album');
-        }
-
-        if (this.albumElement) {
-            this.albumElement.innerText = value;
-        }
+        this.albumElement.innerText = value;
     }
 
     private set artist(value: string) {
-        if (!this.artistElement) {
-            this.artistElement = document.querySelector('.track-artist');
-        }
-
-        if (this.artistElement) {
-            this.artistElement.innerText = value;
-        }
+        this.artistElement.innerText = value;
     }
 
     private set title(value: string) {
-        if (!this.titleElement) {
-            this.titleElement = document.querySelector('.track-title');
-        }
-
-        if (this.titleElement) {
-            this.titleElement.innerText = value;
-        }
+        this.titleElement.innerText = value;
     }
 
     private albumElement: HTMLElement;
@@ -50,7 +32,12 @@ class NowPlayingWidget {
 
     private titleElement: HTMLElement;
 
-    constructor(apiKey: string, user: string, apiPollFrequency: number) {
+    constructor(
+        apiKey: string,
+        user: string,
+        apiPollFrequency: number,
+        widgetOptions: WidgetOptions
+    ) {
         if (!user) {
             throw new Error(
                 `NowPlayingWidget::Constructor - Parameter 'user' was not provided. A user must be provided.`
@@ -69,6 +56,22 @@ class NowPlayingWidget {
 
         const artStackElement = document.querySelector('.art-stack') as HTMLElement;
         this.artStack = new ArtStack(artStackElement);
+
+        this.albumElement = document.querySelector('.album');
+        this.artistElement = document.querySelector('.artist');
+        this.titleElement = document.querySelector('.title');
+
+        if (!widgetOptions.showAlbum) {
+            this.albumElement.classList.add('hidden');
+        }
+
+        if (!widgetOptions.showArtist) {
+            this.artistElement.classList.add('hidden');
+        }
+
+        if (!widgetOptions.showTitle) {
+            this.titleElement.classList.add('hidden');
+        }
     }
 
     public checkNowPlaying(): void {
@@ -109,9 +112,9 @@ class NowPlayingWidget {
     }
 
     private updateCurrentTrackInformation(track: LastFmTrack): void {
-        // this.album = track.album;
-        // this.artist = track.artist;
-        // this.title = track.title;
+        this.album = track.album;
+        this.artist = track.artist;
+        this.title = track.title;
     }
 }
 
@@ -124,6 +127,16 @@ window.addEventListener('onWidgetLoad', function (obj) {
     const user: string = fieldData.lastFmUsername as string;
     const pollFrequency: number = Time.toMilliseconds(fieldData.lastFmApiPollFrequency as number);
 
-    nowPlayingWidget = new NowPlayingWidget(apiKey, user, pollFrequency);
+    const showAlbum = (fieldData.showAlbum as string) === 'true';
+    const showArtist = (fieldData.showArtist as string) === 'true';
+    const showTitle = (fieldData.showTitle as string) === 'true';
+
+    const options: WidgetOptions = {
+        showAlbum,
+        showArtist,
+        showTitle,
+    };
+
+    nowPlayingWidget = new NowPlayingWidget(apiKey, user, pollFrequency, options);
     nowPlayingWidget.start();
 });
