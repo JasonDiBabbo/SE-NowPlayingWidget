@@ -1,26 +1,25 @@
-/* .widget {
-    display: flex;
-    flex-direction: row;
-
-    height: 100px;
-    width: 400px;
-
-    border: 1px solid red;
-}
-
-.track-art {
-    flex-grow: 0;
-
-    height: 100px;
-    width: 100px;
-}
-
-.track-info {
-    flex-grow: 1;
-} */
-
 :root {
     --albumArtBorderRadius: {{albumArtBorderRadius}}px;
+    --albumArtHeight: {{albumArtHeight}}px;
+    --albumArtWidth: {{albumArtWidth}}px;
+    --albumArtSpaceAround: {{albumArtSpaceAround}}px;
+    --widgetBackgroundColor: {{widgetBackgroundColor}};
+    --widgetBorderRadius: {{widgetBorderRadius}}px;
+}
+
+
+.widget {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-color: var(--widgetBackgroundColor);
+    border-radius: var(--widgetBorderRadius);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 img {
@@ -33,14 +32,15 @@ img[src] {
 
 .art-stack,
 .art {
-    height: 100px;
-    width: 100px;
+    height: var(--albumArtHeight);
+    width: var(--albumArtWidth);
 
     border-radius: var(--albumArtBorderRadius);
 }
 
 .art-stack {
     position: relative;
+    margin: var(--albumArtSpaceAround);    
 }
 
 .art {

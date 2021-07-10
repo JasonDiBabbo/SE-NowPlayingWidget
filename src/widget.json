@@ -19,16 +19,54 @@
         "min": 10,
         "step": 1
     },
+    "widgetBorderRadius": {
+        "group": "Widget Options",
+        "type": "number",
+        "label": "Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "widgetBackgroundColor": {
+        "group": "Widget Options",
+        "label": "Background color",
+        "type": "colorpicker",
+        "value": "#363636"
+    },
     "fontFamily": {
         "group": "Text Options",
         "type": "googleFont",
         "label": "Font family",
         "value": "Montserrat"
     },
+    "albumArtHeight": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Height (px)",
+        "value": 100,
+        "min": 50,
+        "step": 1
+    },
+    "albumArtWidth": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Width (px)",
+        "value": 100,
+        "min": 50,
+        "step": 1
+    },
     "albumArtBorderRadius": {
         "group": "Artwork Options",
         "type": "number",
         "label": "Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "albumArtSpaceAround": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Space Around (px)",
         "value": 0,
         "min": 0,
         "step": 1
