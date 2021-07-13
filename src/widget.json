@@ -29,15 +29,9 @@
     },
     "widgetBackgroundColor": {
         "group": "Widget Options",
-        "label": "Background color",
+        "label": "Background Color",
         "type": "colorpicker",
         "value": "#363636"
-    },
-    "fontFamily": {
-        "group": "Text Options",
-        "type": "googleFont",
-        "label": "Font family",
-        "value": "Montserrat"
     },
     "albumArtHeight": {
         "group": "Artwork Options",
@@ -55,20 +49,215 @@
         "min": 50,
         "step": 1
     },
-    "albumArtBorderRadius": {
+    "artTopLeftBorderRadius": {
         "group": "Artwork Options",
         "type": "number",
-        "label": "Border Radius (px)",
+        "label": "Top Left Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
-    "albumArtSpaceAround": {
+    "artTopRightBorderRadius": {
         "group": "Artwork Options",
         "type": "number",
-        "label": "Space Around (px)",
+        "label": "Top Right Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1
+    },
+    "artBottomLeftBorderRadius": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Bottom Left Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artBottomRightBorderRadius": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Bottom Right Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginTop": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Top Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginRight": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Right Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginBottom": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Bottom Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginLeft": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Left Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "fontFamily": {
+        "group": "Text Options",
+        "type": "googleFont",
+        "label": "Font family",
+        "value": "Montserrat"
+    },
+    "infoWidth": {
+        "group": "Text Options",
+        "label": "Text Area Width",
+        "type": "number",
+        "value": 100,
+        "min": 100,
+        "step": 1
+    },
+    "infoMarginRight": {
+        "group": "Text Options",
+        "type": "number",
+        "label": "Text Right Margin",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "infoMarginLeft": {
+        "group": "Text Options",
+        "type": "number",
+        "label": "Text Left Margin",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "showAlbum": {
+        "group": "Album Options",
+        "label": "Show Album",
+        "type": "dropdown",
+        "value": "true",
+        "options": {
+            "true": "Yes",
+            "false": "No"
+        }
+    },
+    "albumFontSize": {
+        "group": "Album Options",
+        "type": "number",
+        "label": "Album Font Size (px)",
+        "min": 1,
+        "step": 1,
+        "value": 12
+    },
+    "albumFontWeight": {
+        "group": "Album Options",
+        "label": "Album Font Weight",
+        "type": "dropdown",
+        "options": {
+            "100": "100 - Thin",
+            "300": "300 - Light",
+            "400": "400 - Regular",
+            "500": "500 - Medium",
+            "700": "700 - Bold",
+            "800": "800 - Extra Bold",
+            "900": "900 - Black"
+        },
+        "value": "400"
+    },
+    "albumFontColor": {
+        "group": "Album Options",
+        "label": "Album Font Color",
+        "type": "colorpicker",
+        "value": "#FFFFFF"
+    },
+    "showArtist": {
+        "group": "Artist Options",
+        "label": "Show Artist",
+        "type": "dropdown",
+        "value": "true",
+        "options": {
+            "true": "Yes",
+            "false": "No"
+        }
+    },
+    "artistFontSize": {
+        "group": "Artist Options",
+        "type": "number",
+        "label": "Track Artist Font Size (px)",
+        "min": 1,
+        "step": 1,
+        "value": 12
+    },
+    "artistFontWeight": {
+        "group": "Artist Options",
+        "label": "Artist Font Weight",
+        "type": "dropdown",
+        "options": {
+            "100": "100 - Thin",
+            "300": "300 - Light",
+            "400": "400 - Regular",
+            "500": "500 - Medium",
+            "700": "700 - Bold",
+            "800": "800 - Extra Bold",
+            "900": "900 - Black"
+        },
+        "value": "400"
+    },
+    "artistFontColor": {
+        "group": "Artist Options",
+        "label": "Artist Font Color",
+        "type": "colorpicker",
+        "value": "#FFFFFF"
+    },
+    "showTitle": {
+        "group": "Title Options",
+        "label": "Show Title",
+        "type": "dropdown",
+        "value": "true",
+        "options": {
+            "true": "Yes",
+            "false": "No"
+        }
+    },
+    "titleFontSize": {
+        "group": "Title Options",
+        "type": "number",
+        "label": "Title Font Size (px)",
+        "min": 1,
+        "step": 1,
+        "value": 12
+    },
+    "titleFontWeight": {
+        "group": "Title Options",
+        "label": "Title Font Weight",
+        "type": "dropdown",
+        "options": {
+            "100": "100 - Thin",
+            "300": "300 - Light",
+            "400": "400 - Regular",
+            "500": "500 - Medium",
+            "700": "700 - Bold",
+            "800": "800 - Extra Bold",
+            "900": "900 - Black"
+        },
+        "value": "400"
+    },
+    "titleFontColor": {
+        "group": "Title Options",
+        "label": "Title Font Color",
+        "type": "colorpicker",
+        "value": "#FFFFFF"
     }
 }
