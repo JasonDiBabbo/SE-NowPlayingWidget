@@ -49,18 +49,66 @@
         "min": 50,
         "step": 1
     },
-    "albumArtBorderRadius": {
+    "artTopLeftBorderRadius": {
         "group": "Artwork Options",
         "type": "number",
-        "label": "Border Radius (px)",
+        "label": "Top Left Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
-    "albumArtSpaceAround": {
+    "artTopRightBorderRadius": {
         "group": "Artwork Options",
         "type": "number",
-        "label": "Space Around (px)",
+        "label": "Top Right Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artBottomLeftBorderRadius": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Bottom Left Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artBottomRightBorderRadius": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Bottom Right Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginTop": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Top Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginRight": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Right Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginBottom": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Bottom Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artMarginLeft": {
+        "group": "Artwork Options",
+        "type": "number",
+        "label": "Left Margin (px)",
         "value": 0,
         "min": 0,
         "step": 1

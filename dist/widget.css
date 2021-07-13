@@ -1,11 +1,17 @@
 :root {
-    --albumArtBorderRadius: {{albumArtBorderRadius}}px;
     --albumArtHeight: {{albumArtHeight}}px;
     --albumArtWidth: {{albumArtWidth}}px;
-    --albumArtSpaceAround: {{albumArtSpaceAround}}px;
     --albumFontColor: {{albumFontColor}};
     --albumFontSize: {{albumFontSize}}px;
     --albumFontWeight: {{albumFontWeight}};
+    --artTopLeftBorderRadius: {{artTopLeftBorderRadius}}px;
+    --artTopRightBorderRadius: {{artTopRightBorderRadius}}px;
+    --artBottomLeftBorderRadius: {{artBottomLeftBorderRadius}}px;
+    --artBottomRightBorderRadius: {{artBottomRightBorderRadius}}px;
+    --artMarginTop: {{artMarginTop}}px;
+    --artMarginRight: {{artMarginRight}}px;
+    --artMarginBottom: {{artMarginBottom}}px;
+    --artMarginLeft: {{artMarginLeft}}px;
     --artistFontColor: {{artistFontColor}};
     --artistFontSize: {{artistFontSize}}px;
     --artistFontWeight: {{artistFontWeight}};
@@ -53,12 +59,18 @@ img[src] {
     height: var(--albumArtHeight);
     width: var(--albumArtWidth);
 
-    border-radius: var(--albumArtBorderRadius);
+    border-top-left-radius: var(--artTopLeftBorderRadius);
+    border-top-right-radius: var(--artTopRightBorderRadius);
+    border-bottom-left-radius: var(--artBottomLeftBorderRadius);
+    border-bottom-right-radius: var(--artBottomRightBorderRadius);
 }
 
 .art-stack {
     position: relative;
-    margin: var(--albumArtSpaceAround);    
+    margin-top: var(--artMarginTop);
+    margin-right: var(--artMarginRight);
+    margin-bottom: var(--artMarginBottom);
+    margin-left: var(--artMarginLeft);
 }
 
 .art {
