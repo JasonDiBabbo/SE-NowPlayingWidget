@@ -8,9 +8,15 @@ class NowPlayingWidget {
 
     private readonly artStack: ArtStack;
 
+    private readonly lastFmService: LastFmService;
+
     private readonly user: string;
 
-    private readonly lastFmService: LastFmService;
+    private readonly showArtist: boolean;
+
+    private readonly showAlbum: boolean;
+
+    private readonly showTitle: boolean;
 
     private currentTrack: LastFmTrack;
 
@@ -53,26 +59,16 @@ class NowPlayingWidget {
 
         this.user = options.lastFmUsername;
         this.apiPollFrequency = options.apiPollFrequency;
+        this.showAlbum = options.showAlbum;
+        this.showArtist = options.showArtist;
+        this.showTitle = options.showTitle;
         this.lastFmService = new LastFmService(options.lastFmApiKey);
-
-        const artStackElement = document.querySelector('.art-stack') as HTMLElement;
-        this.artStack = new ArtStack(artStackElement);
-
+        this.artStack = new ArtStack(document.querySelector('.art-stack') as HTMLElement);
         this.albumElement = document.querySelector('.album');
         this.artistElement = document.querySelector('.artist');
         this.titleElement = document.querySelector('.title');
 
-        if (!options.showAlbum) {
-            this.albumElement.classList.add('hidden');
-        }
-
-        if (!options.showArtist) {
-            this.artistElement.classList.add('hidden');
-        }
-
-        if (!options.showTitle) {
-            this.titleElement.classList.add('hidden');
-        }
+        this.removeUnusedDomElements();
     }
 
     public checkNowPlaying(): void {
@@ -103,6 +99,20 @@ class NowPlayingWidget {
         this.checkNowPlaying();
     }
 
+    private removeUnusedDomElements(): void {
+        if (!this.showAlbum) {
+            this.albumElement.remove();
+        }
+
+        if (!this.showArtist) {
+            this.artistElement.remove();
+        }
+
+        if (!this.showTitle) {
+            this.titleElement.remove();
+        }
+    }
+
     private updateCurrentTrack(track: LastFmTrack): void {
         this.updateCurrentTrackArtwork(track);
         this.updateCurrentTrackInformation(track);
@@ -113,9 +123,17 @@ class NowPlayingWidget {
     }
 
     private updateCurrentTrackInformation(track: LastFmTrack): void {
-        this.album = track.album;
-        this.artist = track.artist;
-        this.title = track.title;
+        if (this.showAlbum) {
+            this.album = track.album;
+        }
+
+        if (this.showArtist) {
+            this.artist = track.artist;
+        }
+
+        if (this.showTitle) {
+            this.title = track.title;
+        }
     }
 }
 
