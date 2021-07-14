@@ -10,7 +10,7 @@ class NowPlayingWidget {
 
     private readonly lastFmService: LastFmService;
 
-    private readonly user: string;
+    private readonly lastFmUsername: string;
 
     private readonly showArtist: boolean;
 
@@ -21,15 +21,21 @@ class NowPlayingWidget {
     private currentTrack: LastFmTrack;
 
     private set album(value: string) {
-        this.albumElement.innerText = value;
+        if (this.albumElement) {
+            this.albumElement.innerText = value;
+        }
     }
 
     private set artist(value: string) {
-        this.artistElement.innerText = value;
+        if (this.artistElement) {
+            this.artistElement.innerText = value;
+        }
     }
 
     private set title(value: string) {
-        this.titleElement.innerText = value;
+        if (this.titleElement) {
+            this.titleElement.innerText = value;
+        }
     }
 
     private albumElement: HTMLElement;
@@ -57,7 +63,7 @@ class NowPlayingWidget {
             );
         }
 
-        this.user = options.lastFmUsername;
+        this.lastFmUsername = options.lastFmUsername;
         this.apiPollFrequency = options.apiPollFrequency;
         this.showAlbum = options.showAlbum;
         this.showArtist = options.showArtist;
@@ -73,20 +79,20 @@ class NowPlayingWidget {
 
     public checkNowPlaying(): void {
         this.lastFmService
-            .getMostRecentTrack(this.user)
+            .getMostRecentTrack(this.lastFmUsername)
             .then((track) => {
-                const sameSong = track.equals(this.currentTrack);
+                const isSameTrack = track.equals(this.currentTrack);
 
-                if (track.nowPlaying && !sameSong) {
-                    const sameAlbum = this.currentTrack
+                if (track.nowPlaying && !isSameTrack) {
+                    const isSameAlbum = this.currentTrack
                         ? track.album === this.currentTrack.album
                         : false;
 
                     this.currentTrack = track;
-                    if (sameAlbum) {
-                        this.updateCurrentTrackInformation(this.currentTrack);
+                    if (isSameAlbum) {
+                        this.updateInformation(this.currentTrack);
                     } else {
-                        this.updateCurrentTrack(this.currentTrack);
+                        this.update(this.currentTrack);
                     }
                 }
             })
@@ -100,29 +106,29 @@ class NowPlayingWidget {
     }
 
     private removeUnusedDomElements(): void {
-        if (!this.showAlbum) {
+        if (!this.showAlbum && this.albumElement) {
             this.albumElement.remove();
         }
 
-        if (!this.showArtist) {
+        if (!this.showArtist && this.artistElement) {
             this.artistElement.remove();
         }
 
-        if (!this.showTitle) {
+        if (!this.showTitle && this.titleElement) {
             this.titleElement.remove();
         }
     }
 
-    private updateCurrentTrack(track: LastFmTrack): void {
-        this.updateCurrentTrackArtwork(track);
-        this.updateCurrentTrackInformation(track);
+    private update(track: LastFmTrack): void {
+        this.updateArtwork(track);
+        this.updateInformation(track);
     }
 
-    private updateCurrentTrackArtwork(track: LastFmTrack): void {
+    private updateArtwork(track: LastFmTrack): void {
         this.artStack.artwork = track.albumArtExtraLarge;
     }
 
-    private updateCurrentTrackInformation(track: LastFmTrack): void {
+    private updateInformation(track: LastFmTrack): void {
         if (this.showAlbum) {
             this.album = track.album;
         }
