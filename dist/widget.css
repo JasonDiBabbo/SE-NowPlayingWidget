@@ -1,6 +1,6 @@
 :root {
-    --albumArtHeight: {{albumArtHeight}}px;
-    --albumArtWidth: {{albumArtWidth}}px;
+    --artHeight: {{artHeight}}px;
+    --artWidth: {{artWidth}}px;
     --albumFontColor: {{albumFontColor}};
     --albumFontSize: {{albumFontSize}}px;
     --albumFontWeight: {{albumFontWeight}};
@@ -56,8 +56,8 @@ img[src] {
 
 .art-stack,
 .art {
-    height: var(--albumArtHeight);
-    width: var(--albumArtWidth);
+    height: var(--artHeight);
+    width: var(--artWidth);
 
     border-top-left-radius: var(--artTopLeftBorderRadius);
     border-top-right-radius: var(--artTopRightBorderRadius);

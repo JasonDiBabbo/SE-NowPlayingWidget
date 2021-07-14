@@ -33,7 +33,17 @@
         "type": "colorpicker",
         "value": "#363636"
     },
-    "albumArtHeight": {
+    "showArt": {
+        "group": "Artwork Options",
+        "label": "Show Artwork",
+        "type": "dropdown",
+        "value": "true",
+        "options": {
+            "true": "Yes",
+            "false": "No"
+        }
+    },
+    "artHeight": {
         "group": "Artwork Options",
         "type": "number",
         "label": "Height (px)",
@@ -41,7 +51,7 @@
         "min": 50,
         "step": 1
     },
-    "albumArtWidth": {
+    "artWidth": {
         "group": "Artwork Options",
         "type": "number",
         "label": "Width (px)",
@@ -120,25 +130,25 @@
         "value": "Montserrat"
     },
     "infoWidth": {
-        "group": "Text Options",
-        "label": "Text Area Width",
+        "group": "Track Information Options",
+        "label": "Width (px)",
         "type": "number",
         "value": 100,
         "min": 100,
         "step": 1
     },
     "infoMarginRight": {
-        "group": "Text Options",
+        "group": "Track Information Options",
         "type": "number",
-        "label": "Text Right Margin",
+        "label": "Text Right Margin (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
     "infoMarginLeft": {
-        "group": "Text Options",
+        "group": "Track Information Options",
         "type": "number",
-        "label": "Text Left Margin",
+        "label": "Text Left Margin (px)",
         "value": 0,
         "min": 0,
         "step": 1

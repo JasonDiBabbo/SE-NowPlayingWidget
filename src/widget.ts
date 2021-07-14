@@ -12,6 +12,8 @@ class NowPlayingWidget {
 
     private readonly lastFmUsername: string;
 
+    private readonly showArt: boolean;
+
     private readonly showArtist: boolean;
 
     private readonly showAlbum: boolean;
@@ -65,14 +67,20 @@ class NowPlayingWidget {
 
         this.lastFmUsername = options.lastFmUsername;
         this.apiPollFrequency = options.apiPollFrequency;
+        this.showArt = options.showArt;
         this.showAlbum = options.showAlbum;
         this.showArtist = options.showArtist;
         this.showTitle = options.showTitle;
         this.lastFmService = new LastFmService(options.lastFmApiKey);
-        this.artStack = new ArtStack(document.querySelector('.art-stack') as HTMLElement);
+
         this.albumElement = document.querySelector('.album');
         this.artistElement = document.querySelector('.artist');
         this.titleElement = document.querySelector('.title');
+
+        if (this.showArt) {
+            const artStackElement = document.querySelector('.art-stack') as HTMLElement;
+            this.artStack = new ArtStack(artStackElement);
+        }
 
         this.removeUnusedDomElements();
     }
@@ -106,6 +114,10 @@ class NowPlayingWidget {
     }
 
     private removeUnusedDomElements(): void {
+        if (!this.showArt) {
+            document.querySelector('.art-stack').remove();
+        }
+
         if (!this.showAlbum && this.albumElement) {
             this.albumElement.remove();
         }
@@ -120,12 +132,14 @@ class NowPlayingWidget {
     }
 
     private update(track: LastFmTrack): void {
-        this.updateArtwork(track);
+        this.updateArt(track);
         this.updateInformation(track);
     }
 
-    private updateArtwork(track: LastFmTrack): void {
-        this.artStack.artwork = track.albumArtExtraLarge;
+    private updateArt(track: LastFmTrack): void {
+        if (this.showArt) {
+            this.artStack.artwork = track.albumArtExtraLarge;
+        }
     }
 
     private updateInformation(track: LastFmTrack): void {
@@ -155,6 +169,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
     );
 
     const showAlbum = (fieldData.showAlbum as string) === 'true';
+    const showArt = (fieldData.showArt as string) === 'true';
     const showArtist = (fieldData.showArtist as string) === 'true';
     const showTitle = (fieldData.showTitle as string) === 'true';
 
@@ -163,6 +178,7 @@ window.addEventListener('onWidgetLoad', function (obj) {
         lastFmApiKey,
         lastFmUsername,
         showAlbum,
+        showArt,
         showArtist,
         showTitle,
     };
