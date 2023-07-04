@@ -6,11 +6,11 @@ If you're new to the StreamElements platform and/or have any questions about cus
 
 ## Using the widget with StreamElements
 
-To use the widget on your StreamElements overlay, copy the content of the `widget.html|css|js|json` files in the `dist` folder to a custom widget defined in your overlay.
-
-The widget uses Last<span>.fm's</span> Music Discovery API to provide information about user listening history. In order for the widget to function, you will need an API key. Last<span>.fm</span> provides instructions on how to request one [here](https://www.last.fm/api).
+First, this version of the widget uses Last<span>.fm's</span> Music Discovery API to provide information about user listening history. In order for the widget to function, you will need to provide your own API key. Last<span>.fm</span> provides instructions on how to request one [here](https://www.last.fm/api).
 
 Once you have an API key, enter it into the corresponding parameter field in the widget. You will also need to similarly provide your Last<span>.fm</span> username in one of the parameter fields.
+
+To use the widget on StreamElements, copy the content of the `widget.html|css|js|json` files in the `dist` folder to a custom widget defined in your own custom overlay.
 
 ## Building the widget
 
