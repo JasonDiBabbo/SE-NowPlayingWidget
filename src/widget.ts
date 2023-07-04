@@ -51,9 +51,9 @@ class NowPlayingWidget {
             );
         }
 
-        if (options.apiPollFrequency < 10000) {
+        if (options.apiPollFrequency < Time.toMilliseconds(2)) {
             throw new Error(
-                `NowPlayingWidget::Constructor - Options value for 'apiPollFrequency' cannot be less than 10 seconds.`
+                `NowPlayingWidget::Constructor - Options value for 'apiPollFrequency' cannot be less than 2 seconds.`
             );
         }
 
