@@ -25,6 +25,12 @@
     --titleFontWeight: {{titleFontWeight}};
     --widgetBackgroundColor: {{widgetBackgroundColor}};
     --widgetBorderRadius: {{widgetBorderRadius}}px;
+
+    /* New variables - will sort later  */
+    --widgetShadowXOffset: {{widgetShadowXOffset}}px;
+    --widgetShadowYOffset: {{widgetShadowYOffset}}px;
+    --widgetShadowBlurRadius: {{widgetShadowBlurRadius}}px;
+    --widgetShadowColor: {{widgetShadowColor}};
 }
 
 html {
@@ -44,6 +50,13 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    filter: drop-shadow(
+        var(--widgetShadowXOffset)
+        var(--widgetShadowYOffset)
+        var(--widgetShadowBlurRadius)
+        var(--widgetShadowColor)
+    );
 }
 
 img {

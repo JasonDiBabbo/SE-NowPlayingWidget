@@ -2,7 +2,7 @@
     "lastFmUsername": {
         "group": "Last.fm Options",
         "type": "text",
-        "label": "Username",
+        "label": "Last.fm Username",
         "value": ""
     },
     "lastFmApiKey": {
@@ -20,18 +20,62 @@
         "step": 0.5
     },
     "widgetBorderRadius": {
-        "group": "Widget Options",
+        "group": "Widget Dimensions",
         "type": "number",
         "label": "Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
+    "widgetHeight": {
+        "group": "Widget Dimensions",
+        "label": "Height (px)",
+        "value": 100,
+        "min": 50,
+        "step": 1
+    },
+    "widgetWidth": {
+        "group": "Widget Dimensions",
+        "label": "Width (px)",
+        "value": 400,
+        "min": 50,
+        "step": 1
+    },
     "widgetBackgroundColor": {
-        "group": "Widget Options",
+        "group": "Widget Colors",
         "label": "Background Color",
         "type": "colorpicker",
         "value": "#363636"
+    },
+    "widgetShadowXOffset": {
+        "group": "Widget Effects",
+        "label": "Drop shadow x-offset (px)",
+        "type": "number",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "widgetShadowYOffset": {
+        "group": "Widget Effects",
+        "label": "Drop shadow y-offset (px)",
+        "type": "number",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "widgetShadowBlurRadius": {
+        "group": "Widget Effects",
+        "label": "Drop shadow blur radius (px)",
+        "type": "number",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "widgetShadowColor": {
+        "group": "Widget Effects",
+        "label": "Drop shadow color",
+        "type": "colorpicker",
+        "value": "#303030"
     },
     "albumArtHeight": {
         "group": "Artwork Options",
