@@ -1,4 +1,7 @@
+import { ArtMode } from '@models';
+
 export interface WidgetOptions {
+    artMode: ArtMode;
     apiPollFrequency: number;
     lastFmApiKey: string;
     lastFmUsername: string;

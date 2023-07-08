@@ -1,7 +1,7 @@
 import { ArtStack } from 'components';
-import { LastFmTrack, WidgetOptions } from '@models';
+import { ArtMode, FieldData, GoogleFontSettings, LastFmTrack, WidgetOptions } from '@models';
 import { LastFmService } from '@services';
-import { Time } from '@utilities';
+import { GoogleFonts, Time } from '@utilities';
 
 class NowPlayingWidget {
     private readonly apiPollFrequency: number;
@@ -11,6 +11,8 @@ class NowPlayingWidget {
     private readonly lastFmService: LastFmService;
 
     private readonly user: string;
+
+    private readonly artMode: ArtMode;
 
     private readonly showArtist: boolean;
 
@@ -57,6 +59,7 @@ class NowPlayingWidget {
             );
         }
 
+        this.artMode = options.artMode;
         this.user = options.lastFmUsername;
         this.apiPollFrequency = options.apiPollFrequency;
         this.showAlbum = options.showAlbum;
@@ -64,6 +67,11 @@ class NowPlayingWidget {
         this.showTitle = options.showTitle;
         this.lastFmService = new LastFmService(options.lastFmApiKey);
         this.artStack = new ArtStack(document.querySelector('.art-stack') as HTMLElement);
+
+        if (this.artMode === ArtMode.None) {
+            document.querySelector('.art-stack').remove();
+        }
+
         this.albumElement = document.querySelector('.album');
         this.artistElement = document.querySelector('.artist');
         this.titleElement = document.querySelector('.title');
@@ -114,7 +122,10 @@ class NowPlayingWidget {
     }
 
     private updateCurrentTrack(track: LastFmTrack): void {
-        this.updateCurrentTrackArtwork(track);
+        if (this.artMode == ArtMode.AlbumArt) {
+            this.updateCurrentTrackArtwork(track);
+        }
+
         this.updateCurrentTrackInformation(track);
     }
 
@@ -139,20 +150,38 @@ class NowPlayingWidget {
 
 let nowPlayingWidget: NowPlayingWidget;
 
-window.addEventListener('onWidgetLoad', function (obj) {
-    const fieldData = obj['detail']['fieldData'];
+function parseArtMode(settingValue: string): ArtMode {
+    if (!settingValue) {
+        throw new Error(`Parameter 'settingValue' is null or undefined.`);
+    }
 
-    const lastFmApiKey: string = fieldData.lastFmApiKey as string;
-    const lastFmUsername: string = fieldData.lastFmUsername as string;
+    switch (settingValue) {
+        case 'none':
+            return ArtMode.None;
+        case 'albumArt':
+            return ArtMode.AlbumArt;
+        case 'custom':
+            return ArtMode.Custom;
+        default:
+            throw new Error(`Unknown art mode value '${settingValue}' provided.`);
+    }
+}
+
+function getWidgetOptions(fieldData: FieldData): WidgetOptions {
     const apiPollFrequency: number = Time.toMilliseconds(
         fieldData.lastFmApiPollFrequency as number
     );
 
-    const showAlbum = (fieldData.showAlbum as string) === 'true';
-    const showArtist = (fieldData.showArtist as string) === 'true';
-    const showTitle = (fieldData.showTitle as string) === 'true';
+    const lastFmApiKey: string = fieldData.lastFmApiKey as string;
+    const lastFmUsername: string = fieldData.lastFmUsername as string;
+    const showAlbum: boolean = (fieldData.showAlbum as string) === 'true';
+    const showArtist: boolean = (fieldData.showArtist as string) === 'true';
+    const showTitle: boolean = (fieldData.showTitle as string) === 'true';
 
-    const options: WidgetOptions = {
+    const artMode: ArtMode = parseArtMode(fieldData.artMode as string);
+
+    return {
+        artMode,
         apiPollFrequency,
         lastFmApiKey,
         lastFmUsername,
@@ -160,6 +189,14 @@ window.addEventListener('onWidgetLoad', function (obj) {
         showArtist,
         showTitle,
     };
+}
+
+window.addEventListener('onWidgetLoad', function (obj) {
+    const fieldData: FieldData = obj['detail']['fieldData'];
+    const options: WidgetOptions = getWidgetOptions(fieldData);
+
+    const googleFontSettings: GoogleFontSettings = GoogleFonts.GetGoogleFontSettings(fieldData);
+    GoogleFonts.PrepareGoogleFontImports(googleFontSettings);
 
     nowPlayingWidget = new NowPlayingWidget(options);
     nowPlayingWidget.start();

@@ -1,54 +1,56 @@
 {
     "lastFmUsername": {
-        "group": "Last.fm Options",
+        "group": "Last.fm Settings",
         "type": "text",
         "label": "Last.fm Username",
         "value": ""
     },
     "lastFmApiKey": {
-        "group": "Last.fm Options",
+        "group": "Last.fm Settings",
         "type": "text",
         "label": "API Key",
         "value": ""
     },
     "lastFmApiPollFrequency": {
-        "group": "Last.fm Options",
+        "group": "Last.fm Settings",
         "label": "API Poll Frequency (sec)",
         "type": "number",
         "value": 10,
         "min": 2,
         "step": 0.5
     },
+    "widgetBackgroundColor": {
+        "group": "Colour and Shape",
+        "label": "Background Color",
+        "type": "colorpicker",
+        "value": "#363636"
+    },
+    "widgetHeight": {
+        "group": "Colour and Shape",
+        "label": "Height (px)",
+        "type": "number",
+        "value": 100,
+        "min": 50,
+        "step": 1
+    },
+    "widgetWidth": {
+        "group": "Colour and Shape",
+        "label": "Width (px)",
+        "type": "number",
+        "value": 400,
+        "min": 50,
+        "step": 1
+    },
     "widgetBorderRadius": {
-        "group": "Widget Dimensions",
+        "group": "Colour and Shape",
         "type": "number",
         "label": "Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
-    "widgetHeight": {
-        "group": "Widget Dimensions",
-        "label": "Height (px)",
-        "value": 100,
-        "min": 50,
-        "step": 1
-    },
-    "widgetWidth": {
-        "group": "Widget Dimensions",
-        "label": "Width (px)",
-        "value": 400,
-        "min": 50,
-        "step": 1
-    },
-    "widgetBackgroundColor": {
-        "group": "Widget Colors",
-        "label": "Background Color",
-        "type": "colorpicker",
-        "value": "#363636"
-    },
     "widgetShadowXOffset": {
-        "group": "Widget Effects",
+        "group": "Drop Shadow",
         "label": "Drop shadow x-offset (px)",
         "type": "number",
         "value": 0,
@@ -56,7 +58,7 @@
         "step": 1
     },
     "widgetShadowYOffset": {
-        "group": "Widget Effects",
+        "group": "Drop Shadow",
         "label": "Drop shadow y-offset (px)",
         "type": "number",
         "value": 0,
@@ -64,7 +66,7 @@
         "step": 1
     },
     "widgetShadowBlurRadius": {
-        "group": "Widget Effects",
+        "group": "Drop Shadow",
         "label": "Drop shadow blur radius (px)",
         "type": "number",
         "value": 0,
@@ -72,61 +74,53 @@
         "step": 1
     },
     "widgetShadowColor": {
-        "group": "Widget Effects",
+        "group": "Drop Shadow",
         "label": "Drop shadow color",
         "type": "colorpicker",
         "value": "#303030"
     },
-    "albumArtHeight": {
-        "group": "Artwork Options",
+    "artMode": {
+        "group": "Art Settings",
+        "label": "Display Mode",
+        "type": "dropdown",
+        "options": {
+            "none": "Show no artwork",
+            "albumArt": "Show album artwork",
+            "custom": "Show custom image"
+        },
+        "value": "albumArt"
+    },
+    "artCustomSource": {
+        "group": "Art Settings",
+        "type": "image-input",
+        "label": "Custom Image"
+    },
+    "artHeight": {
+        "group": "Art Settings",
         "type": "number",
         "label": "Height (px)",
         "value": 100,
         "min": 50,
         "step": 1
     },
-    "albumArtWidth": {
-        "group": "Artwork Options",
+    "artWidth": {
+        "group": "Art Settings",
         "type": "number",
         "label": "Width (px)",
         "value": 100,
         "min": 50,
         "step": 1
     },
-    "artTopLeftBorderRadius": {
-        "group": "Artwork Options",
+    "artBorderRadius": {
+        "group": "Art Settings",
         "type": "number",
-        "label": "Top Left Border Radius (px)",
-        "value": 0,
-        "min": 0,
-        "step": 1
-    },
-    "artTopRightBorderRadius": {
-        "group": "Artwork Options",
-        "type": "number",
-        "label": "Top Right Border Radius (px)",
-        "value": 0,
-        "min": 0,
-        "step": 1
-    },
-    "artBottomLeftBorderRadius": {
-        "group": "Artwork Options",
-        "type": "number",
-        "label": "Bottom Left Border Radius (px)",
-        "value": 0,
-        "min": 0,
-        "step": 1
-    },
-    "artBottomRightBorderRadius": {
-        "group": "Artwork Options",
-        "type": "number",
-        "label": "Bottom Right Border Radius (px)",
+        "label": "Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
     "artMarginTop": {
-        "group": "Artwork Options",
+        "group": "Art Settings",
         "type": "number",
         "label": "Top Margin (px)",
         "value": 0,
@@ -134,7 +128,7 @@
         "step": 1
     },
     "artMarginRight": {
-        "group": "Artwork Options",
+        "group": "Art Settings",
         "type": "number",
         "label": "Right Margin (px)",
         "value": 0,
@@ -142,7 +136,7 @@
         "step": 1
     },
     "artMarginBottom": {
-        "group": "Artwork Options",
+        "group": "Art Settings",
         "type": "number",
         "label": "Bottom Margin (px)",
         "value": 0,
@@ -150,46 +144,86 @@
         "step": 1
     },
     "artMarginLeft": {
-        "group": "Artwork Options",
+        "group": "Art Settings",
         "type": "number",
         "label": "Left Margin (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
-    "fontFamily": {
-        "group": "Text Options",
-        "type": "googleFont",
-        "label": "Font family",
-        "value": "Montserrat"
-    },
-    "infoWidth": {
-        "group": "Text Options",
-        "label": "Text Area Width",
+    "artTopLeftBorderRadius": {
+        "group": "Art Settings",
         "type": "number",
-        "value": 100,
-        "min": 100,
-        "step": 1
-    },
-    "infoMarginRight": {
-        "group": "Text Options",
-        "type": "number",
-        "label": "Text Right Margin",
+        "label": "Top Left Border Radius (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
-    "infoMarginLeft": {
-        "group": "Text Options",
+    "artTopRightBorderRadius": {
+        "group": "Art Settings",
         "type": "number",
-        "label": "Text Left Margin",
+        "label": "Top Right Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artBottomLeftBorderRadius": {
+        "group": "Art Settings",
+        "type": "number",
+        "label": "Bottom Left Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "artBottomRightBorderRadius": {
+        "group": "Art Settings",
+        "type": "number",
+        "label": "Bottom Right Border Radius (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "fontFamily": {
+        "group": "Text Settings",
+        "label": "Font Family",
+        "type": "googleFont",
+        "value": "Montserrat"
+    },
+    "textAreaMarginTop": {
+        "group": "Text Settings",
+        "type": "number",
+        "label": "Text Area Top Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "textAreaMarginRight": {
+        "group": "Text Settings",
+        "type": "number",
+        "label": "Text Area Right Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "textAreaMarginBottom": {
+        "group": "Text Settings",
+        "type": "number",
+        "label": "Text Area Bottom Margin (px)",
+        "value": 0,
+        "min": 0,
+        "step": 1
+    },
+    "textAreaMarginLeft": {
+        "group": "Text Settings",
+        "type": "number",
+        "label": "Text Area Left Margin (px)",
         "value": 0,
         "min": 0,
         "step": 1
     },
     "showAlbum": {
-        "group": "Album Options",
-        "label": "Show Album",
+        "group": "Album Settings",
+        "label": "Show Album Name",
         "type": "dropdown",
         "value": "true",
         "options": {
@@ -198,16 +232,16 @@
         }
     },
     "albumFontSize": {
-        "group": "Album Options",
+        "group": "Album Settings",
         "type": "number",
-        "label": "Album Font Size (px)",
+        "label": "Font Size (px)",
         "min": 1,
         "step": 1,
         "value": 12
     },
     "albumFontWeight": {
-        "group": "Album Options",
-        "label": "Album Font Weight",
+        "group": "Album Settings",
+        "label": "Font Weight",
         "type": "dropdown",
         "options": {
             "100": "100 - Thin",
@@ -221,14 +255,14 @@
         "value": "400"
     },
     "albumFontColor": {
-        "group": "Album Options",
-        "label": "Album Font Color",
+        "group": "Album Settings",
+        "label": "Text Color",
         "type": "colorpicker",
         "value": "#FFFFFF"
     },
     "showArtist": {
-        "group": "Artist Options",
-        "label": "Show Artist",
+        "group": "Artist Settings",
+        "label": "Show Artist Name",
         "type": "dropdown",
         "value": "true",
         "options": {
@@ -237,16 +271,16 @@
         }
     },
     "artistFontSize": {
-        "group": "Artist Options",
+        "group": "Artist Settings",
         "type": "number",
-        "label": "Track Artist Font Size (px)",
+        "label": "Font Size (px)",
         "min": 1,
         "step": 1,
         "value": 12
     },
     "artistFontWeight": {
-        "group": "Artist Options",
-        "label": "Artist Font Weight",
+        "group": "Artist Settings",
+        "label": "Font Weight",
         "type": "dropdown",
         "options": {
             "100": "100 - Thin",
@@ -260,14 +294,14 @@
         "value": "400"
     },
     "artistFontColor": {
-        "group": "Artist Options",
-        "label": "Artist Font Color",
+        "group": "Artist Settings",
+        "label": "Text Color",
         "type": "colorpicker",
         "value": "#FFFFFF"
     },
     "showTitle": {
-        "group": "Title Options",
-        "label": "Show Title",
+        "group": "Title Settings",
+        "label": "Show Track Title",
         "type": "dropdown",
         "value": "true",
         "options": {
@@ -276,16 +310,16 @@
         }
     },
     "titleFontSize": {
-        "group": "Title Options",
+        "group": "Title Settings",
         "type": "number",
-        "label": "Title Font Size (px)",
+        "label": "Font Size (px)",
         "min": 1,
         "step": 1,
         "value": 12
     },
     "titleFontWeight": {
-        "group": "Title Options",
-        "label": "Title Font Weight",
+        "group": "Title Settings",
+        "label": "Font Weight",
         "type": "dropdown",
         "options": {
             "100": "100 - Thin",
@@ -299,8 +333,8 @@
         "value": "400"
     },
     "titleFontColor": {
-        "group": "Title Options",
-        "label": "Title Font Color",
+        "group": "Title Settings",
+        "label": "Text Color",
         "type": "colorpicker",
         "value": "#FFFFFF"
     }
