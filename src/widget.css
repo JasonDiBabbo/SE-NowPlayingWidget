@@ -1,9 +1,10 @@
 :root {
-    --albumArtHeight: {{albumArtHeight}}px;
-    --albumArtWidth: {{albumArtWidth}}px;
     --albumFontColor: {{albumFontColor}};
     --albumFontSize: {{albumFontSize}}px;
     --albumFontWeight: {{albumFontWeight}};
+
+    --artHeight: {{artWidth}}px;
+    --artWidth: {{artWidth}}px;
     --artTopLeftBorderRadius: {{artTopLeftBorderRadius}}px;
     --artTopRightBorderRadius: {{artTopRightBorderRadius}}px;
     --artBottomLeftBorderRadius: {{artBottomLeftBorderRadius}}px;
@@ -12,36 +13,56 @@
     --artMarginRight: {{artMarginRight}}px;
     --artMarginBottom: {{artMarginBottom}}px;
     --artMarginLeft: {{artMarginLeft}}px;
+
     --artistFontColor: {{artistFontColor}};
     --artistFontSize: {{artistFontSize}}px;
     --artistFontWeight: {{artistFontWeight}};
+
     --fontFamily: {{fontFamily}};
-    --fontSize: {{fontSize}}px;
-    --infoMarginLeft: {{infoMarginLeft}}px;
-    --infoMarginRight: {{infoMarginRight}}px;
-    --infoWidth: {{infoWidth}}px;
+
     --titleFontColor: {{titleFontColor}};
     --titleFontSize: {{titleFontSize}}px;
     --titleFontWeight: {{titleFontWeight}};
+
+    --widgetHeight: {{widgetHeight}}px;
+    --widgetWidth: {{widgetWidth}}px;
     --widgetBackgroundColor: {{widgetBackgroundColor}};
     --widgetBorderRadius: {{widgetBorderRadius}}px;
 
-    /* New variables - will sort later  */
     --widgetShadowXOffset: {{widgetShadowXOffset}}px;
     --widgetShadowYOffset: {{widgetShadowYOffset}}px;
     --widgetShadowBlurRadius: {{widgetShadowBlurRadius}}px;
     --widgetShadowColor: {{widgetShadowColor}};
+
+    --textAreaMarginTop: {{textAreaMarginTop}}px;
+    --textAreaMarginRight: {{textAreaMarginRight}}px;
+    --textAreaMarginBottom: {{textAreaMarginBottom}}px;
+    --textAreaMarginLeft: {{textAreaMarginLeft}}px;
 }
 
 html {
     font-family: var(--fontFamily);
-    font-size: var(--fontSize);
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-container.no-wrap {
+    flex-wrap: nowrap;
+}
+
+.flex-container.justify-start {
+    justify-content: flex-start;
+}
+
+.flex-container.vertically-center {
+    align-items: center;
 }
 
 .widget {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    height: var(--widgetHeight);
+    width: var(--widgetWidth);
 
     background-color: var(--widgetBackgroundColor);
     border-radius: var(--widgetBorderRadius);
@@ -69,8 +90,8 @@ img[src] {
 
 .art-stack,
 .art {
-    height: var(--albumArtHeight);
-    width: var(--albumArtWidth);
+    height: var(--artHeight);
+    width: var(--artWidth);
 
     border-top-left-radius: var(--artTopLeftBorderRadius);
     border-top-right-radius: var(--artTopRightBorderRadius);
@@ -79,6 +100,8 @@ img[src] {
 }
 
 .art-stack {
+    flex-grow: 0;
+
     position: relative;
     margin-top: var(--artMarginTop);
     margin-right: var(--artMarginRight);
@@ -96,18 +119,17 @@ img[src] {
 }
 
 .info {
-    flex: 0 0 auto;
+    flex-grow: 1;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin-left: var(--infoMarginLeft);
-    margin-right: var(--infoMarginRight);
-    width: var(--infoWidth);
+    margin-left: var(--textAreaMarginLeft);
+    margin-right: var(--textAreaMarginRight);
 }
 
 .info, .artist, .title, .album {
-    max-width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
