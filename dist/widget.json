@@ -86,9 +86,22 @@
         "options": {
             "none": "Show no artwork",
             "albumArt": "Show album artwork",
+            "premade": "Show premade image (select below)",
             "custom": "Show custom image"
         },
         "value": "albumArt"
+    },
+    "artPremadeSelection": {
+        "group": "Art Settings",
+        "label": "Premade Art Selection",
+        "type": "dropdown",
+        "options": {
+            "none": "None",
+            "premade1": "Graphic #1",
+            "premade2": "Graphic #2",
+            "premade3": "Graphic #3"
+        },
+        "value": "none"
     },
     "artCustomSource": {
         "group": "Art Settings",

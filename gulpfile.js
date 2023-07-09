@@ -5,13 +5,16 @@ const log = require('fancy-log');
 const prettier = require('gulp-prettier');
 const gulpWebpack = require('webpack-stream');
 const webpackCompiler = require('webpack');
-const webpackConfig = require('./webpack.config')
+const webpackConfig = require('./webpack.config');
+const webpackMinConfig = require('./webpack.config.min');
 
 function bundle() {
     log('Running bundler');
 
     return src('src/widget.ts')
         .pipe(gulpWebpack(webpackConfig, webpackCompiler, function() { }))
+        .pipe(dest('dist/'))
+        .pipe(gulpWebpack(webpackMinConfig, webpackCompiler, function () { }))
         .pipe(dest('dist/'));
 }
 

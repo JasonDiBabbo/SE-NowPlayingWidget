@@ -88,30 +88,43 @@ img[src] {
     display: block;
 }
 
-.art-stack,
-.art {
-    height: var(--artHeight);
-    width: var(--artWidth);
-
-    border-top-left-radius: var(--artTopLeftBorderRadius);
-    border-top-right-radius: var(--artTopRightBorderRadius);
-    border-bottom-left-radius: var(--artBottomLeftBorderRadius);
-    border-bottom-right-radius: var(--artBottomRightBorderRadius);
-}
-
-.art-stack {
+.art-container {
+    display: flex;
+    align-items: center;
     flex-grow: 0;
 
-    position: relative;
+    min-width: var(--artWidth);
+    min-height: var(--artHeight);
+
     margin-top: var(--artMarginTop);
     margin-right: var(--artMarginRight);
     margin-bottom: var(--artMarginBottom);
     margin-left: var(--artMarginLeft);
 }
 
+.art,
+.art-container,
+.art-stack,
+.art-premade {
+    height: var(--artHeight);
+    width: var(--artWidth);
+}
+
+.art,
+.custom-art {
+    border-top-left-radius: var(--artTopLeftBorderRadius);
+    border-top-right-radius: var(--artTopRightBorderRadius);
+    border-bottom-left-radius: var(--artBottomLeftBorderRadius);
+    border-bottom-right-radius: var(--artBottomRightBorderRadius);
+}
+
 .art {
     position: absolute;
     transition: opacity 1s linear;
+}
+
+.art-stack {
+    position: relative;
 }
 
 .transparent {
