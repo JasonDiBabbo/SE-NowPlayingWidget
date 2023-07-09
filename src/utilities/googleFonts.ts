@@ -1,76 +1,36 @@
-import { FieldData, GoogleFontSettings } from '@models';
+import { SettingsService } from '@services';
+import { Guard } from '@utilities';
 
 /**
  * A helper class for configuring Google fonts in the widget.
  */
 export class GoogleFonts {
     /**
-     * Gets the Google Font settings specified in field data.
-     *
-     * @param fieldData
-     * @returns The Google Font settings
-     */
-    public static GetGoogleFontSettings(fieldData: FieldData): GoogleFontSettings {
-        if (!fieldData) {
-            throw new Error(`Parameter 'fieldData' is null or undefined.`);
-        }
-
-        if (!fieldData.fontFamily) {
-            throw new Error(`Field data entry for 'fontFamily' is missing.`);
-        }
-
-        if (!fieldData.albumFontWeight) {
-            throw new Error(`Field data entry for 'albumFontWeight' is missing.`);
-        }
-
-        if (!fieldData.artistFontWeight) {
-            throw new Error(`Field data entry for 'artistFontWeight' is missing.`);
-        }
-
-        if (!fieldData.titleFontWeight) {
-            throw new Error(`Field data entry for 'titleFontWeight' is missing.`);
-        }
-
-        const fontFamily: string = fieldData.fontFamily as string;
-        const albumFontWeight: string = fieldData.albumFontWeight as string;
-        const artistFontWeight: string = fieldData.artistFontWeight as string;
-        const titleFontWeight: string = fieldData.titleFontWeight as string;
-
-        const fontWeightSet: Set<string> = new Set<string>([
-            albumFontWeight,
-            artistFontWeight,
-            titleFontWeight,
-        ]);
-
-        return {
-            fontFamily,
-            fontWeights: [...fontWeightSet].sort((a, b) => {
-                return parseInt(a) - parseInt(b);
-            }),
-        };
-    }
-
-    /**
      * Prepares the DOM for importing Google fonts.
+     *
+     * @param settingsService The settings service.
      */
-    public static PrepareGoogleFontImports(googleFontSettings: GoogleFontSettings): void {
-        console.log(googleFontSettings);
+    public static PrepareGoogleFontImports(settingsService: SettingsService): void {
+        Guard.mustNotBeNullOrUndefined(
+            settingsService,
+            'Settings service dependency must be provided.'
+        );
 
-        if (!googleFontSettings) {
-            throw new Error(`Parameter 'googleFontSettings' is null or undefined.`);
-        }
+        Guard.mustNotBeNullOrUndefined(
+            settingsService.fontFamily,
+            'A font family must be specified.'
+        );
 
-        if (!googleFontSettings.fontFamily) {
-            throw new Error(`A font family must be provided.`);
-        }
+        Guard.mustNotBeNullOrUndefined(
+            settingsService.fontWeights,
+            'Font weights must be specified.'
+        );
 
-        if (!googleFontSettings.fontWeights) {
-            throw new Error(`A font weights array must be provided.`);
-        }
-
-        if (googleFontSettings.fontWeights.length < 1) {
-            throw new Error(`At least one font weight must be specified.`);
-        }
+        Guard.mustContainAtLeast(
+            settingsService.fontWeights,
+            1,
+            'At least one font weight must be specified.'
+        );
 
         if (this.GoogleFontsIsPrepared()) {
             return;
@@ -90,7 +50,7 @@ export class GoogleFonts {
         document.head.appendChild(preconnectLink);
         document.head.appendChild(crossOriginPreconnectLink);
 
-        GoogleFonts.ImportGoogleFont(googleFontSettings);
+        GoogleFonts.ImportGoogleFont(settingsService.fontFamily, settingsService.fontWeights);
     }
 
     /**
@@ -110,12 +70,12 @@ export class GoogleFonts {
      *
      * @param googleFontSettings
      */
-    private static ImportGoogleFont(googleFontSettings: GoogleFontSettings): void {
+    private static ImportGoogleFont(fontFamily: string, fontWeights: string[]): void {
         const uri =
             'https://fonts.googleapis.com/css2?family=' +
-            googleFontSettings.fontFamily.replace(' ', '+') +
+            fontFamily.replace(' ', '+') +
             ':wght@' +
-            googleFontSettings.fontWeights.join(';');
+            fontWeights.join(';');
 
         const googleFontElement: HTMLLinkElement = document.createElement('link');
         googleFontElement.rel = 'stylesheet';

@@ -10,7 +10,7 @@ First, this version of the widget uses Last<span>.fm's</span> Music Discovery AP
 
 Once you have an API key, enter it into the corresponding parameter field in the widget. You will also need to similarly provide your Last<span>.fm</span> username in one of the parameter fields.
 
-To use the widget on StreamElements, copy the content of the `widget.html|css|js|json` files in the `dist` folder to a custom widget defined in your own custom overlay.
+To use the widget on StreamElements, copy the content of the `widget.html|css|js|json` files in the `dist` folder to a custom widget defined in your own custom overlay. Note that there are two different widget.js files: `widget.js` and `widget.min.js`. There is no functional difference between these two files. The main reason I've chosen to include the readable JavaScript is just in case you want to do live changes to the JavaScript file without re-transpiling.
 
 ## Building the widget
 
