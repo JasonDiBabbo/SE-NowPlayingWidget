@@ -1,3 +1,5 @@
+import { Guard } from './guard';
+
 /**
  * A helper class for providing SVG markup for premade animations to display.
  */
@@ -223,6 +225,11 @@ export class SVG {
      * @returns The SVG markup string.
      */
     public static getPremadeArtSVG(key: string): string {
+        Guard.mustNotBeNullOrUndefined(
+            key,
+            `SVG::getPremadeArtSVG - Parameter 'key' is null or undefined.`
+        );
+
         if (!SVG.artTable[key]) {
             throw new Error(`Unknown key '${key}' was not found in premade SVG art.`);
         }

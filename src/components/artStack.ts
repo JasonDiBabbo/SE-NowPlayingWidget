@@ -1,4 +1,12 @@
+import { Guard } from '@utilities';
+
+/**
+ * The class definition of the art stack component for showing album art and displaying transitions between new and old artworks.
+ */
 export class ArtStack {
+    /**
+     * Sets the artwork shown by the art stack.
+     */
     public set artwork(value: string) {
         this.appendImage(value);
 
@@ -12,24 +20,39 @@ export class ArtStack {
         }
     }
 
+    /**
+     * Initializes a new instance of the ArtStack class.
+     *
+     * @param artStackElement The HTML element of the art stack.
+     */
     constructor(private artStackElement: HTMLElement) {
-        if (!this.artStackElement) {
-            throw new Error(
-                `ArtStack::Constructor - DOM element with class 'art-stack' could not be found.`
-            );
-        }
+        Guard.mustNotBeNullOrUndefined(
+            this.artStackElement,
+            `ArtStack::constructor - Parameter 'artStackElement' is null or undefined.`
+        );
     }
 
-    private appendImage(src: string): void {
+    /**
+     * Appends an image to the art stack.
+     *
+     * @param source The new image source.
+     */
+    private appendImage(source: string): void {
         const nextImage: HTMLImageElement = document.createElement('img');
         nextImage.classList.add('art');
         nextImage.classList.add('transparent');
-        nextImage.src = src;
+        nextImage.src = source;
 
         this.artStackElement.appendChild(nextImage);
         this.requestBrowserAnimation(nextImage);
     }
 
+    /**
+     * Fades in a new image.
+     *
+     * @param index The art stack entry index.
+     * @returns A promise fulfilled when the transition finishes.
+     */
     private fadeInImage(index: number): Promise<void> {
         if (this.artStackElement.children.length <= index) {
             throw new Error(
@@ -51,6 +74,12 @@ export class ArtStack {
         });
     }
 
+    /**
+     * Fades out an old image.
+     *
+     * @param index The art stack entry index.
+     * @returns A promise fulfilled when the transition finishes.
+     */
     private fadeOutImage(index: number): Promise<void> {
         if (this.artStackElement.children.length <= index) {
             throw new Error(
@@ -73,6 +102,11 @@ export class ArtStack {
         });
     }
 
+    /**
+     * Requests an animation refresh from the browser.
+     *
+     * @param element The element animating.
+     */
     private requestBrowserAnimation(element: HTMLElement): void {
         void element.offsetWidth;
     }

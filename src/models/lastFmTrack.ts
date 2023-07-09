@@ -1,3 +1,6 @@
+/**
+ * The track data from the Last.fm API.
+ */
 export class LastFmTrack {
     /**
      * The name of the album.
@@ -39,6 +42,11 @@ export class LastFmTrack {
      */
     public title: string;
 
+    /**
+     * Initializes a new instance of the LastFmTrack class.
+     *
+     * @param json The request response JSON from the Last.fm API.
+     */
     constructor(json: unknown) {
         this.album = json?.['album']?.['#text'];
         this.artist = json?.['artist']?.['#text'];
@@ -60,6 +68,12 @@ export class LastFmTrack {
         }
     }
 
+    /**
+     * Determines if a track is the same as another track.
+     *
+     * @param track The track to compare this one to.
+     * @returns True if the tracks are identical and false otherwise.
+     */
     public equals(track: LastFmTrack): boolean {
         if (!track) {
             return false;
