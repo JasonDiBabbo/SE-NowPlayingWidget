@@ -54,8 +54,6 @@ export class GoogleFonts {
      * Prepares the DOM for importing Google fonts.
      */
     public static PrepareGoogleFontImports(googleFontSettings: GoogleFontSettings): void {
-        console.log(googleFontSettings);
-
         if (!googleFontSettings) {
             throw new Error(`Parameter 'googleFontSettings' is null or undefined.`);
         }
